@@ -16,7 +16,8 @@ RUN npx prisma generate
 RUN npm run build
 
 # TODO: Production stage
-FROM node:20-alpine AS production
+FROM node:20-alpine AS runner
+WORKDIR /app
 RUN mkdir -p /app
 
 # TODO: Copy built assets and necessary files
@@ -30,7 +31,7 @@ COPY --from=builder /app/node_modules/.prisma ./node_modules/.prisma
 
 # TODO: SET ENV variables
 ENV NODE_ENV=production
-ENV DATABASE_URL=postgresql://${POSTGRES_USER}:${POSTGRES_PASSWORD}@db:5432/${POSTGRES_DB} 
+ENV DATABASE_URL=postgresql://postgres:FXZAAXTWCRdzYHRSFKNQGwbbKsWAQaJQ@postgres.railway.internal:5432/railway
 
 
 # TODO: install production dependencies
