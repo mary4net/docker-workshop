@@ -18,7 +18,6 @@ RUN npm run build
 # TODO: Production stage
 FROM node:20-alpine AS runner
 WORKDIR /app
-RUN mkdir -p /app
 
 # TODO: Copy built assets and necessary files
 COPY --from=builder /app/package*.json ./
